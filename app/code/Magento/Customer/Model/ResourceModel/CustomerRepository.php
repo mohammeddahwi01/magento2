@@ -159,6 +159,11 @@ class CustomerRepository implements \Magento\Customer\Api\CustomerRepositoryInte
             \Magento\Customer\Api\Data\CustomerInterface::class
         );
 
+        $prevCustomerGroupId = $prevCustomerData->getGroupId();
+        if ( !isset($customerData['group_id']) && $prevCustomerGroupId > 0 ) {
+            $customerData['group_id'] = $prevCustomerGroupId;
+        }
+
         $customer->setAddresses($origAddresses);
         $customerModel = $this->customerFactory->create(['data' => $customerData]);
         $storeId = $customerModel->getStoreId();
