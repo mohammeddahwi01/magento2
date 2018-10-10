@@ -5,14 +5,18 @@
  */
 namespace Magento\Customer\Controller\Adminhtml;
 
-use Magento\Customer\Api\Data\GroupInterfaceFactory;
-use Magento\Customer\Api\GroupRepositoryInterface;
-
 /**
- * Customer groups controller
+ * Class Group
+ *
+ * @package Magento\Customer\Controller\Adminhtml
  */
 abstract class Group extends \Magento\Backend\App\Action
 {
+
+    /**
+     * @var \Magento\Framework\Registry
+     */
+    protected $_coreRegistry;
     /**
      * Authorization level of a basic admin session
      *
@@ -21,55 +25,28 @@ abstract class Group extends \Magento\Backend\App\Action
     const ADMIN_RESOURCE = 'Magento_Customer::group';
 
     /**
-     * Core registry
-     *
-     * @var \Magento\Framework\Registry
-     */
-    protected $_coreRegistry;
-
-    /**
-     * @var GroupRepositoryInterface
-     */
-    protected $groupRepository;
-
-    /**
-     * @var GroupInterfaceFactory
-     */
-    protected $groupDataFactory;
-
-    /**
-     * @var \Magento\Backend\Model\View\Result\ForwardFactory
-     */
-    protected $resultForwardFactory;
-
-    /**
-     * @var \Magento\Framework\View\Result\PageFactory
-     */
-    protected $resultPageFactory;
-
-    /**
-     * Initialize Group Controller
-     *
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
-     * @param GroupRepositoryInterface $groupRepository
-     * @param GroupInterfaceFactory $groupDataFactory
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        GroupRepositoryInterface $groupRepository,
-        GroupInterfaceFactory $groupDataFactory,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        \Magento\Framework\Registry $coreRegistry
     ) {
         $this->_coreRegistry = $coreRegistry;
-        $this->groupRepository = $groupRepository;
-        $this->groupDataFactory = $groupDataFactory;
         parent::__construct($context);
-        $this->resultForwardFactory = $resultForwardFactory;
-        $this->resultPageFactory = $resultPageFactory;
+    }
+
+    /**
+     * Init page
+     *
+     * @param \Magento\Backend\Model\View\Result\Page $resultPage
+     * @return \Magento\Backend\Model\View\Result\Page
+     */
+    public function initPage($resultPage)
+    {
+        $resultPage->setActiveMenu(self::ADMIN_RESOURCE)
+            ->addBreadcrumb(__('Customers'), __('Customers'))
+            ->addBreadcrumb(__('Customer Group'), __('Customer Group'));
+        return $resultPage;
     }
 }
