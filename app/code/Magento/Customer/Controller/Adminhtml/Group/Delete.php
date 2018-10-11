@@ -23,12 +23,12 @@ class Delete extends \Magento\Customer\Controller\Adminhtml\Group
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
         // check if we know what should be deleted
-        $id = $this->getRequest()->getParam('id');
-        if ($id) {
+        $groupId = $this->getRequest()->getParam('id');
+        if ($groupId) {
             try {
                 // init model and delete
                 $model = $this->_objectManager->create(\Magento\Customer\Model\Group::class);
-                $model->load($id);
+                $model->load($groupId);
                 $model->delete();
                 // display success message
                 $this->messageManager->addSuccessMessage(__('You deleted the Group.'));
@@ -38,7 +38,7 @@ class Delete extends \Magento\Customer\Controller\Adminhtml\Group
                 // display error message
                 $this->messageManager->addErrorMessage($e->getMessage());
                 // go back to edit form
-                return $resultRedirect->setPath('*/*/edit', ['group_id' => $id]);
+                return $resultRedirect->setPath('*/*/edit', ['group_id' => $groupId]);
             }
         }
         // display error message
