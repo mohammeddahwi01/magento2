@@ -43,10 +43,10 @@ class Save extends \Magento\Backend\App\Action
         $resultRedirect = $this->resultRedirectFactory->create();
         $data = $this->getRequest()->getPostValue();
         if ($data) {
-            $id = $this->getRequest()->getParam('id');
+            $groupId = $this->getRequest()->getParam('id');
 
-            $model = $this->_objectManager->create(\Magento\Customer\Model\Group::class)->load($id);
-            if (!$model->getId() && $id) {
+            $model = $this->_objectManager->create(\Magento\Customer\Model\Group::class)->load($groupId);
+            if (!$model->getId() && $groupId) {
                 $this->messageManager->addErrorMessage(__('This Customer Group no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
