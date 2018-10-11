@@ -40,12 +40,12 @@ class Edit extends \Magento\Customer\Controller\Adminhtml\Group
     public function execute()
     {
         // 1. Get ID and create model
-        $id = $this->getRequest()->getParam('id');
+        $groupId = $this->getRequest()->getParam('id');
         $model = $this->_objectManager->create(\Magento\Customer\Model\Group::class);
 
         // 2. Initial checking
-        if ($id) {
-            $model->load($id);
+        if ($groupId) {
+            $model->load($groupId);
             if (!$model->getId()) {
                 $this->messageManager->addErrorMessage(__('This Group no longer exists.'));
                 /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
