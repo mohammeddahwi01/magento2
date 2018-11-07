@@ -15,11 +15,27 @@
     </argument>
     <settings>
         <buttons>
-            <button class="Magento\Customer\Block\Adminhtml\Group\Edit\BackButton" name="back"/>
+            <button name="back">
+                <url path="*/*/"/>
+                <class>back</class>
+                <label translate="true">Back</label>
+            </button>
             <button class="Magento\Customer\Block\Adminhtml\Group\Edit\DeleteButton" name="delete"/>
-            <button class="Magento\Customer\Block\Adminhtml\Group\Edit\ResetButton" name="reset"/>
-            <button class="Magento\Customer\Block\Adminhtml\Group\Edit\SaveButton" name="save"/>
-            <button class="Magento\Customer\Block\Adminhtml\Group\Edit\SaveAndContinueButton" name="save_and_continue"/>
+            <button name="reset">
+                <url path="*/*/*"/>
+                <class>reset</class>
+                <label translate="true">Reset</label>
+            </button>
+            <button name="save">
+                <url path="*/*/save"/>
+                <class>save primary</class>
+                <label translate="true">Save Customer Group</label>
+            </button>
+            <button name="save_and_continue">
+                <url path="*/*/save/back/1"/>
+                <class>save</class>
+                <label translate="true">Save and Continue Edit</label>
+            </button>
         </buttons>
         <namespace>customer_group_form</namespace>
         <dataScope>data</dataScope>
